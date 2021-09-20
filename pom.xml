@@ -3,6 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.openmrs.module</groupId>
+		<artifactId>eptssync</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	
 	<groupId>fgh.sp</groupId>
 	<artifactId>sp-changedrecordsdetector</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -18,12 +24,14 @@
 		    <version>5.1.49</version>
 		</dependency>
 		
+		<!-- 
 		<dependency>
 		    <groupId>org.openmrs.module</groupId>
 		    <artifactId>eptssync-api</artifactId>
 		    <version>1.0-SNAPSHOT</version>
 		</dependency>
-		
+		 -->
+		 
 		<dependency>
 		    <groupId>fgh.spi</groupId>
 		    <artifactId>spi-changedrecordsdetector</artifactId>
