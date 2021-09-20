@@ -1,10 +1,13 @@
 package fgh.sp.eip.changedrecordsdetector.model;
 
-public class SenderRetryQueueItemDAO {
+import java.sql.Connection;
+
+import org.openmrs.module.eptssync.model.base.BaseDAO;
+import org.openmrs.module.eptssync.utilities.db.conn.DBException;
+
+public class SenderRetryQueueItemDAO extends BaseDAO{
 	
-//public class SenderRetryQueueItemDAO extends BaseDAO{
-	
-	/*public static void insert(SenderRetryQueueItem record, Connection conn) throws DBException{
+	public static void insert(SenderRetryQueueItem record, Connection conn) throws DBException{
 		try {
 			Object[] params = {record.getEvent().getTableName(),
 							   record.getEvent().getPrimaryKeyId(),
@@ -50,5 +53,5 @@ public class SenderRetryQueueItemDAO {
 				throw e;
 			}
 		}
-	}*/
+	}
 }

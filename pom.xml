@@ -24,13 +24,11 @@
 		    <version>5.1.49</version>
 		</dependency>
 		
-		<!-- 
 		<dependency>
 		    <groupId>org.openmrs.module</groupId>
 		    <artifactId>eptssync-api</artifactId>
 		    <version>1.0-SNAPSHOT</version>
 		</dependency>
-		 -->
 		 
 		<dependency>
 		    <groupId>fgh.spi</groupId>
