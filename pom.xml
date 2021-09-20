@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.openmrs.module</groupId>
+		<artifactId>eptssync</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	
+	<groupId>fgh.sp</groupId>
+	<artifactId>sp-changedrecordsdetector</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>sp-changedrecordsdetector</name>
+	<description>Changed Record action implemetation</description>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.49</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.openmrs.module</groupId>
+		    <artifactId>eptssync-api</artifactId>
+		    <version>1.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>fgh.spi</groupId>
+		    <artifactId>spi-changedrecordsdetector</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+				<!-- Begin OpenMRS core -->
+		
+		<dependency>
+			<groupId>org.openmrs.api</groupId>
+			<artifactId>openmrs-api</artifactId>
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.openmrs.web</groupId>
+			<artifactId>openmrs-web</artifactId>
+			<type>jar</type>
+		</dependency>
+				
+		<dependency>
+			<groupId>org.openmrs.api</groupId>
+			<artifactId>openmrs-api</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.openmrs.web</groupId>
+			<artifactId>openmrs-web</artifactId>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.openmrs.test</groupId>
+			<artifactId>openmrs-test</artifactId>
+			<type>pom</type>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- End OpenMRS core -->
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		
+		<plugins>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-shade-plugin</artifactId>
+			  <version>2.3</version>
+			  <executions>
+			     <!-- Run shade goal on package phase -->
+			    <execution>
+				<phase>package</phase>
+				<goals>
+					<goal>shade</goal>
+				</goals>
+				
+				<configuration>
+					 <createDependencyReducedPom>false</createDependencyReducedPom>
+				  <transformers>
+							<!-- add Main-Class to manifest file -->
+	                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+						<mainClass>fgh.sp.eip.changedrecordsdetector.SpChangedrecordsdetectorApplication</mainClass>
+					</transformer>
+				  </transformers>
+				</configuration>
+			      </execution>
+			  </executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
