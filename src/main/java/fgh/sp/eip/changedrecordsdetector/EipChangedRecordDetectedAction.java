@@ -1,13 +1,13 @@
 package fgh.sp.eip.changedrecordsdetector;
 
 
-/*import org.openmrs.module.eptssync.utilities.db.conn.DBConnectionInfo;
+import org.openmrs.module.eptssync.utilities.db.conn.DBConnectionInfo;
 import org.openmrs.module.eptssync.utilities.db.conn.DBConnectionService;
-import org.openmrs.module.eptssync.utilities.db.conn.DBException;
-import org.openmrs.module.eptssync.utilities.db.conn.OpenConnection;*/
+import org.openmrs.module.eptssync.utilities.db.conn.OpenConnection;
 
 import fgh.sp.eip.changedrecordsdetector.model.Event;
 import fgh.sp.eip.changedrecordsdetector.model.SenderRetryQueueItem;
+import fgh.sp.eip.changedrecordsdetector.model.SenderRetryQueueItemDAO;
 import fgh.spi.changedrecordsdetector.ChangedRecord;
 import fgh.spi.changedrecordsdetector.DetectedRecordAction;
 
@@ -17,28 +17,26 @@ import fgh.spi.changedrecordsdetector.DetectedRecordAction;
  */
 public class EipChangedRecordDetectedAction implements DetectedRecordAction {
 
-	//private DBConnectionService dbService;
+	private DBConnectionService dbService;
 	
 	public EipChangedRecordDetectedAction() {
-		//DBConnectionInfo dbConnInfo = new DBConnectionInfo();
+		DBConnectionInfo dbConnInfo = new DBConnectionInfo();
 		/*dbConnInfo.setConnectionURI("jdbc:h2:tcp://localhost/./sender/openmrs_eip_mgt");
 		dbConnInfo.setDataBaseUserName("admin");
 		dbConnInfo.setDataBaseUserPassword("admin123");
 		dbConnInfo.setDriveClassName("org.h2.Driver");*/
 		
-		/*
 		dbConnInfo.setConnectionURI("jdbc:mysql://localhost:3307/openmrs_eip_sender_mgt");
 		dbConnInfo.setDataBaseUserName("root");
 		dbConnInfo.setDataBaseUserPassword("root");
-		dbConnInfo.setDriveClassName("com.mysql.jdbc.Driver");*/
+		dbConnInfo.setDriveClassName("com.mysql.jdbc.Driver");
 		
-		//this.dbService = DBConnectionService.init(dbConnInfo );
+		this.dbService = DBConnectionService.init(dbConnInfo );
 	}
-	
-	/*
+
 	public OpenConnection openConnection() {
 		return dbService.openConnection();
-	}*/
+	}
 	
 	@Override
 	public void performeAction(ChangedRecord record) {
@@ -60,16 +58,16 @@ public class EipChangedRecordDetectedAction implements DetectedRecordAction {
 		
 		item.setEvent(event);
 		
-		//OpenConnection conn = openConnection();
+		OpenConnection conn = openConnection();
 		
 		try {
-			//SenderRetryQueueItemDAO.insert(item, conn);
-			//conn.markAsSuccessifullyTerminected();
+			SenderRetryQueueItemDAO.insert(item, conn);
+			conn.markAsSuccessifullyTerminected();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} 
 		finally {
-			//conn.finalizeConnection();
+			conn.finalizeConnection();
 		}
 	}
 
